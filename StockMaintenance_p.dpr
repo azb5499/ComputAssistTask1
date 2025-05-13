@@ -2,7 +2,8 @@ program StockMaintenance_p;
 
 uses
   Vcl.Forms,
-  LoginForm_u in 'source\LoginForm_u.pas' {LoginForm};
+  LoginForm_u in 'source\LoginForm_u.pas' {LoginForm},
+  user_auth_u in 'source\user_auth_u.pas';
 
 {$R *.res}
 

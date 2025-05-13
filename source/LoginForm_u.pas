@@ -33,8 +33,15 @@ implementation
 {$R *.dfm}
 
 procedure TLoginForm.LoginButtonClick(Sender: TObject);
+var
+sPassword, sUserName : string;
 begin
-ShowMessage('Hello World');
+sUserName := UsernameLabelEdit.Text;
+sPassword := PasswordLabelEdit.text;
+if (sUserName = 'John') and (sPassword = '1234') then
+begin
+ShowMessage('proceed');
+end;
 end;
 
 end.
