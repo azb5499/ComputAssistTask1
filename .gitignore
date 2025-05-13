@@ -30,6 +30,7 @@
 *.o
 *.so
 *.ocx
+*.vlb
 
 # Resource binary files (auto-generated)
 *.res
