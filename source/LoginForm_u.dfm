@@ -10,6 +10,7 @@ object LoginForm: TLoginForm
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnShow = FormShow
   TextHeight = 15
   object LoginLayoutGridPanel: TGridPanel
     Left = 0
@@ -102,6 +103,9 @@ object LoginForm: TLoginForm
           Value = 100.000000000000000000
         end>
       TabOrder = 0
+      ExplicitTop = 114
+      ExplicitWidth = 639
+      ExplicitHeight = 276
       object LeftPanel: TPanel
         Left = 1
         Top = 1
@@ -111,6 +115,8 @@ object LoginForm: TLoginForm
         Color = clLightsteelblue
         ParentBackground = False
         TabOrder = 0
+        ExplicitWidth = 201
+        ExplicitHeight = 274
       end
       object CentrePanel: TPanel
         Left = 203
@@ -120,6 +126,8 @@ object LoginForm: TLoginForm
         Align = alClient
         BorderWidth = 100
         TabOrder = 1
+        ExplicitLeft = 202
+        ExplicitHeight = 274
         object LoginButton: TButton
           AlignWithMargins = True
           Left = 50
@@ -178,6 +186,9 @@ object LoginForm: TLoginForm
         Color = clLightsteelblue
         ParentBackground = False
         TabOrder = 2
+        ExplicitLeft = 438
+        ExplicitWidth = 200
+        ExplicitHeight = 274
       end
     end
     object FooterPanel: TPanel
@@ -190,6 +201,9 @@ object LoginForm: TLoginForm
       Color = clSkyBlue
       ParentBackground = False
       TabOrder = 1
+      ExplicitTop = 393
+      ExplicitWidth = 633
+      ExplicitHeight = 69
     end
   end
 end

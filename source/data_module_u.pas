@@ -17,6 +17,7 @@ type
     StockManagerScript: TFDScript;
     StockManagerQuery: TFDQuery;
     StockManagerFBDriverLink: TFDPhysFBDriverLink;
+    StockManagerDataSource: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure InitializeDatabase;

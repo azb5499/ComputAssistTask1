@@ -21,6 +21,7 @@ type
     UsernameLabelEdit: TLabeledEdit;
     PasswordLabelEdit: TLabeledEdit;
     procedure LoginButtonClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,6 +34,14 @@ var
 implementation
 
 {$R *.dfm}
+
+uses UserDashboardForm_u;
+
+procedure TLoginForm.FormShow(Sender: TObject);
+begin
+UsernameLabelEdit.Clear;
+PasswordLabelEdit.clear;
+end;
 
 procedure TLoginForm.LoginButtonClick(Sender: TObject);
 var
@@ -69,6 +78,8 @@ begin
       // …show user UI…
       begin
          ShowMessage('welcome user');
+         LoginForm.hide;
+         UserDashboardForm.show;
       end;
 
 

@@ -24,4 +24,9 @@ object StockManagerDataModule: TStockManagerDataModule
     Left = 616
     Top = 304
   end
+  object StockManagerDataSource: TDataSource
+    DataSet = StockManagerQuery
+    Left = 648
+    Top = 448
+  end
 end

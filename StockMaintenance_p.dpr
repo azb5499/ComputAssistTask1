@@ -9,7 +9,9 @@ uses
   user_data_access_u in 'source\user_data_access_u.pas',
   data_module_u in 'source\data_module_u.pas' {StockManagerDataModule: TDataModule},
   stock_data_access_u in 'source\stock_data_access_u.pas',
-  stock_exceptions_u in 'source\stock_exceptions_u.pas';
+  stock_exceptions_u in 'source\stock_exceptions_u.pas',
+  ProductManagement_u in 'source\ProductManagement_u.pas' {ProductManagementForm},
+  UserDashboardForm_u in 'source\UserDashboardForm_u.pas' {UserDashboardForm};
 
 {$R *.res}
 
@@ -18,5 +20,7 @@ begin
   Application.MainFormOnTaskbar := True;
 Application.CreateForm(TStockManagerDataModule, StockManagerDataModule);
   Application.CreateForm(TLoginForm, LoginForm);
+  Application.CreateForm(TProductManagementForm, ProductManagementForm);
+  Application.CreateForm(TUserDashboardForm, UserDashboardForm);
   Application.Run;
 end.
