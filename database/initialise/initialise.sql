@@ -10,4 +10,7 @@ CREATE TABLE Users (
   FOREIGN KEY (UserRoleID) REFERENCES Role(UserRoleID)
 );
 
+INSERT INTO Role (UserRoleName) VALUES ('admin');
+INSERT INTO Role (UserRoleName) VALUES ('user');
+
 COMMIT;
