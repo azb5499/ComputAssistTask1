@@ -136,9 +136,10 @@
         <DCCReference Include="source\user_data_access_u.pas"/>
         <DCCReference Include="source\data_module_u.pas">
             <Form>StockManagerDataModule</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="source\stock_data_access_u.pas"/>
+        <DCCReference Include="source\stock_exceptions_u.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

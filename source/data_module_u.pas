@@ -83,6 +83,7 @@ begin
     StockManagerScript.ExecuteAll;
 
     DataAccess.AddAdmin('admin','admin');
+    DataAccess.AddUser('staff','staffLogin');
     ShowMessage('Database created and initialized.');
     ShowMessage('Your default Admin credentials are: Username > admin / Password > admin ')
   end

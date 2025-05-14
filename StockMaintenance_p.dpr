@@ -7,7 +7,9 @@ uses
   user_u in 'source\user_u.pas',
   auth_exceptions_u in 'source\auth_exceptions_u.pas',
   user_data_access_u in 'source\user_data_access_u.pas',
-  data_module_u in 'source\data_module_u.pas' {StockManagerDataModule: TDataModule};
+  data_module_u in 'source\data_module_u.pas' {StockManagerDataModule: TDataModule},
+  stock_data_access_u in 'source\stock_data_access_u.pas',
+  stock_exceptions_u in 'source\stock_exceptions_u.pas';
 
 {$R *.res}
 
