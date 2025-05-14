@@ -55,7 +55,7 @@ end;
 
 procedure TAdminDashboardForm.TotalStockValueReportClick(Sender: TObject);
 begin
-ReportDataModule.ppReport1.Print;
+ReportDataModule.GetReport();
 end;
 
 procedure TAdminDashboardForm.UpdateMarkupButtonClick(Sender: TObject);
