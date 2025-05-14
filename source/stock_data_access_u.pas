@@ -11,6 +11,8 @@ type
   TStockDataAccess = class
   public
     function AddDepartment(const sDepartmentName: string): Boolean;
+    function AddSupplier(const sSupplierName, sContactName, sPhone,
+      sEmail: string): Boolean;
 
   end;
 
@@ -52,6 +54,39 @@ begin
   end;
 end;
 
+function TStockDataAccess.AddSupplier(const sSupplierName, sContactName, sPhone,
+  sEmail: string): Boolean;
+var
+  qry: TFDQuery;
+begin
+  qry := TFDQuery.Create(nil);
+  try
+    qry.Connection := StockManagerDataModule.StockManagerFDConnection;
+    if not qry.Connection.InTransaction then
+      qry.Connection.StartTransaction;
+    qry.SQL.Text := 'SELECT 1 FROM Supplier WHERE SupplierName = :Name';
+    qry.ParamByName('Name').AsString := sSupplierName;
+    qry.Open;
+    if not qry.Eof then
+      raise ESupplierExists.CreateFmt('Supplier "%s" already exists.',
+        [sSupplierName]);
+    qry.Close;
+
+    qry.SQL.Text :=
+      'INSERT INTO Supplier (SupplierName, ContactName, Phone, Email) ' +
+      'VALUES (:Name, :Contact, :Phone, :Email)';
+    qry.ParamByName('Name').AsString := sSupplierName;
+    qry.ParamByName('Contact').AsString := sContactName;
+    qry.ParamByName('Phone').AsString := sPhone;
+    qry.ParamByName('Email').AsString := sEmail;
+    qry.ExecSQL;
+
+    qry.Connection.Commit;
+    Result := True;
+  finally
+    qry.Free;
+  end;
+end;
 
 initialization
 
