@@ -5,12 +5,29 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,stock_data_access_u,
-  Vcl.StdCtrls, Vcl.ExtCtrls;
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Samples.Spin, Vcl.ComCtrls;
 
 type
   TProductManagementForm = class(TForm)
     BackButton: TButton;
     ProductManagementPanel: TPanel;
+    ProductManagementPageControl: TPageControl;
+    AddProductTabsheet: TTabSheet;
+    BrowseProductsTabSheet: TTabSheet;
+    DBGrid1: TDBGrid;
+    SearchEditBox: TEdit;
+    SearchButton: TButton;
+    AddModeButton: TButton;
+    UpdateModeButton: TButton;
+    BarcodeEditBox: TEdit;
+    DescriptionEditBox: TEdit;
+    UpdateProductsPanel: TPanel;
+    DepartmentComboBox: TComboBox;
+    SupplierComboBox: TComboBox;
+    CostPriceSpinEdit: TSpinEdit;
+    QuantitySpinEdit: TSpinEdit;
+    SaveButton: TButton;
+    CancelButton: TButton;
     procedure BackButtonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
