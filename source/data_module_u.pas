@@ -17,7 +17,6 @@ type
     StockManagerScript: TFDScript;
     StockManagerQuery: TFDQuery;
     StockManagerFBDriverLink: TFDPhysFBDriverLink;
-    StockManagerDataSource: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure InitializeDatabase;
@@ -32,7 +31,7 @@ var
 
 implementation
 
-uses user_data_access_u;
+uses user_data_access_u,stock_data_access_u;
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 {$R *.dfm}
 
@@ -85,6 +84,11 @@ begin
 
     DataAccess.AddAdmin('admin','admin');
     DataAccess.AddUser('staff','staffLogin');
+
+    StockDataAccess.AddDepartment('General');
+    StockDataAccess.AddSupplier('SuperU','Sales','0845546698','superu@gmail.com');
+
+    StockDataAccess.AddStockItem('0021445','Fruity Lick','General','SuperU',56.99,100);
     ShowMessage('Database created and initialized.');
     ShowMessage('Your default Admin credentials are: Username > admin / Password > admin ')
   end

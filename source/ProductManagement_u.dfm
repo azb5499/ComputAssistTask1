@@ -20,6 +20,8 @@ object ProductManagementForm: TProductManagementForm
     Height = 461
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 697
+    ExplicitHeight = 453
     object ProductManagementPageControl: TPageControl
       Left = 1
       Top = 1
@@ -28,6 +30,8 @@ object ProductManagementForm: TProductManagementForm
       ActivePage = BrowseProductsTabSheet
       Align = alClient
       TabOrder = 1
+      ExplicitWidth = 695
+      ExplicitHeight = 451
       object AddProductTabsheet: TTabSheet
         Caption = 'Add/Update Product'
         object UpdateProductsPanel: TPanel
@@ -119,36 +123,63 @@ object ProductManagementForm: TProductManagementForm
           TitleFont.Name = 'Segoe UI'
           TitleFont.Style = []
         end
-        object SearchEditBox: TEdit
-          Left = 288
-          Top = 200
-          Width = 121
-          Height = 23
+        object BrowseNavPanel: TPanel
+          Left = 15
+          Top = 191
+          Width = 210
+          Height = 226
           TabOrder = 1
+          object AddModeButton: TButton
+            Left = 40
+            Top = 114
+            Width = 129
+            Height = 64
+            Caption = 'Add Product'
+            TabOrder = 0
+          end
+          object UpdateModeButton: TButton
+            Left = 40
+            Top = 25
+            Width = 129
+            Height = 65
+            Caption = 'Update product'
+            TabOrder = 1
+          end
         end
-        object SearchButton: TButton
-          Left = 312
-          Top = 240
-          Width = 75
-          Height = 25
-          Caption = 'Search'
+        object SearchPanel: TPanel
+          Left = 256
+          Top = 192
+          Width = 185
+          Height = 225
           TabOrder = 2
-        end
-        object AddModeButton: TButton
-          Left = 232
-          Top = 312
-          Width = 81
-          Height = 25
-          Caption = 'Add Product'
-          TabOrder = 3
-        end
-        object UpdateModeButton: TButton
-          Left = 352
-          Top = 312
-          Width = 105
-          Height = 25
-          Caption = 'Update product'
-          TabOrder = 4
+          object SearchButton: TButton
+            Left = 38
+            Top = 135
+            Width = 123
+            Height = 65
+            Caption = 'Search'
+            TabOrder = 0
+            OnClick = SearchButtonClick
+          end
+          object SearchEditBox: TEdit
+            Left = 24
+            Top = 82
+            Width = 145
+            Height = 23
+            TabOrder = 1
+          end
+          object SearchFieldCombo: TComboBox
+            Left = 24
+            Top = 32
+            Width = 145
+            Height = 23
+            TabOrder = 2
+            Items.Strings = (
+              'Barcode'
+              'Description'
+              'Supplier'
+              'Department')
+          end
         end
       end
     end

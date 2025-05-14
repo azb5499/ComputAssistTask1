@@ -31,7 +31,7 @@ CREATE TABLE StockItem (
   SupplierID     INTEGER,
   CostPrice      DECIMAL(14,2) NOT NULL,
   MarkupPercent  DECIMAL(7,2) NOT NULL,
-  RetailPrice    DECIMAL(14,2) COMPUTED BY (CostPrice * (1 + MarkupPercent / 100)),
+  RetailPrice    DECIMAL(14,2),
   QuantityOnHand INTEGER DEFAULT 0 NOT NULL,
   FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID),
   FOREIGN KEY (SupplierID)   REFERENCES Supplier(SupplierID)

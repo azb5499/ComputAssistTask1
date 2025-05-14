@@ -29,9 +29,13 @@ type
     SaveButton: TButton;
     CancelButton: TButton;
     StockManagerDataSource: TDataSource;
+    BrowseNavPanel: TPanel;
+    SearchPanel: TPanel;
+    SearchFieldCombo: TComboBox;
     procedure BackButtonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure SearchButtonClick(Sender: TObject);
   private
     { Private declarations }
     procedure AutoSizeGridColumns(Grid: TDBGrid; SampleSize: Integer = 100);
@@ -126,6 +130,28 @@ begin
 StockManagerDataSource.DataSet := StockDataAccess.FetchAllItems;
 AutoSizeGridColumns(ProductDBGrid);
 
+end;
+
+procedure TProductManagementForm.SearchButtonClick(Sender: TObject);
+var
+sSearchField, sText:string;
+begin
+if SearchFieldCombo.ItemIndex = -1 then
+begin
+  ShowMessage('Please select a category to search by!');
+  exit;
+end;
+
+if SearchEditBox.Text = '' then
+begin
+  ShowMessage('Please enter text to search by!');
+  exit;
+end;
+
+sSearchField := SearchFieldCombo.Text;
+sText := SearchEditBox.Text;
+StockManagerDataSource.DataSet := StockDataAccess.SearchItems(sSearchField,sText);
+AutoSizeGridColumns(ProductDBGrid);
 end;
 
 end.
