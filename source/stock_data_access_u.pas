@@ -21,7 +21,6 @@ type
   //search functionality
   function FetchAllItems: TFDQuery;
   function SearchByBarcode(const sBarcode: string): TFDQuery;
-  function SearchByDescription(const sDescription: string): TFDQuery;
   end;
 
 var

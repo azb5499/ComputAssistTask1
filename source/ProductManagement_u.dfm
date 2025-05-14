@@ -11,6 +11,7 @@ object ProductManagementForm: TProductManagementForm
   Font.Name = 'Segoe UI'
   Font.Style = []
   OnClose = FormClose
+  OnCreate = FormCreate
   TextHeight = 15
   object ProductManagementPanel: TPanel
     Left = 0
@@ -24,7 +25,7 @@ object ProductManagementForm: TProductManagementForm
       Top = 1
       Width = 697
       Height = 459
-      ActivePage = AddProductTabsheet
+      ActivePage = BrowseProductsTabSheet
       Align = alClient
       TabOrder = 1
       object AddProductTabsheet: TTabSheet
@@ -104,12 +105,13 @@ object ProductManagementForm: TProductManagementForm
       object BrowseProductsTabSheet: TTabSheet
         Caption = 'Browse Products'
         ImageIndex = 1
-        object DBGrid1: TDBGrid
+        object ProductDBGrid: TDBGrid
           Left = 0
           Top = 0
           Width = 689
           Height = 185
           Align = alTop
+          DataSource = StockManagerDataSource
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -159,5 +161,9 @@ object ProductManagementForm: TProductManagementForm
       TabOrder = 0
       OnClick = BackButtonClick
     end
+  end
+  object StockManagerDataSource: TDataSource
+    Left = 568
+    Top = 312
   end
 end
