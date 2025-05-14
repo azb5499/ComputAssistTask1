@@ -28,9 +28,11 @@ object ProductManagementForm: TProductManagementForm
       Top = 1
       Width = 697
       Height = 459
-      ActivePage = UpdateProductTabSheet
+      ActivePage = BrowseProductsTabSheet
       Align = alClient
       TabOrder = 1
+      ExplicitWidth = 695
+      ExplicitHeight = 451
       object AddProductTabsheet: TTabSheet
         Caption = 'Add Product'
         OnShow = AddProductTabsheetShow
@@ -113,6 +115,7 @@ object ProductManagementForm: TProductManagementForm
       object BrowseProductsTabSheet: TTabSheet
         Caption = 'Browse Products'
         ImageIndex = 1
+        OnShow = BrowseProductsTabSheetShow
         object ProductDBGrid: TDBGrid
           Left = 0
           Top = 0

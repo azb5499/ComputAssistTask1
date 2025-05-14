@@ -11,7 +11,10 @@ uses
   stock_data_access_u in 'source\stock_data_access_u.pas',
   stock_exceptions_u in 'source\stock_exceptions_u.pas',
   ProductManagement_u in 'source\ProductManagement_u.pas' {ProductManagementForm},
-  UserDashboardForm_u in 'source\UserDashboardForm_u.pas' {UserDashboardForm};
+  UserDashboardForm_u in 'source\UserDashboardForm_u.pas' {UserDashboardForm},
+  AdminDashboardForm_u in 'source\AdminDashboardForm_u.pas' {AdminDashboardForm},
+  AddUserForm_u in 'source\AddUserForm_u.pas' {AddUserForm},
+  UpdateMarkupForm_u in 'source\UpdateMarkupForm_u.pas' {UpdateMarkupForm};
 
 {$R *.res}
 
@@ -22,5 +25,8 @@ Application.CreateForm(TStockManagerDataModule, StockManagerDataModule);
   Application.CreateForm(TLoginForm, LoginForm);
   Application.CreateForm(TProductManagementForm, ProductManagementForm);
   Application.CreateForm(TUserDashboardForm, UserDashboardForm);
+  Application.CreateForm(TAdminDashboardForm, AdminDashboardForm);
+  Application.CreateForm(TAddUserForm, AddUserForm);
+  Application.CreateForm(TUpdateMarkupForm, UpdateMarkupForm);
   Application.Run;
 end.

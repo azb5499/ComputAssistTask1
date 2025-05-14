@@ -142,10 +142,20 @@
         <DCCReference Include="source\stock_exceptions_u.pas"/>
         <DCCReference Include="source\ProductManagement_u.pas">
             <Form>ProductManagementForm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="source\UserDashboardForm_u.pas">
             <Form>UserDashboardForm</Form>
+        </DCCReference>
+        <DCCReference Include="source\AdminDashboardForm_u.pas">
+            <Form>AdminDashboardForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="source\AddUserForm_u.pas">
+            <Form>AddUserForm</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="source\UpdateMarkupForm_u.pas">
+            <Form>UpdateMarkupForm</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask,
-  user_auth_u, user_u, System.Hash;
+  user_auth_u, user_u, System.Hash,AdminDashboardForm_u;
 
 type
   TLoginForm = class(TForm)
@@ -73,6 +73,8 @@ begin
       // …show admin UI…
       begin
          ShowMessage('welcome admin');
+         LoginForm.hide;
+         AdminDashboardForm.show;
       end
     else if objUser.UserRole = 'user' then
       // …show user UI…

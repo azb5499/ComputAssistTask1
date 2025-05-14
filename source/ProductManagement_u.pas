@@ -67,6 +67,7 @@ type
     procedure SupplierComboBox2Enter(Sender: TObject);
     procedure ApplyUpdateButtonClick(Sender: TObject);
     procedure CancelUpdateClick(Sender: TObject);
+    procedure BrowseProductsTabSheetShow(Sender: TObject);
   private
     { Private declarations }
     procedure AutoSizeGridColumns(Grid: TDBGrid; SampleSize: Integer = 100);
@@ -93,6 +94,13 @@ procedure TProductManagementForm.BackButtonClick(Sender: TObject);
 begin
   ProductManagementForm.hide;
   UserDashboardForm.show;
+end;
+
+procedure TProductManagementForm.BrowseProductsTabSheetShow(Sender: TObject);
+begin
+  StockManagerDataSource.DataSet := StockDataAccess.FetchAllItems;
+  AutoSizeGridColumns(ProductDBGrid);
+
 end;
 
 procedure TProductManagementForm.Button2Click(Sender: TObject);
@@ -129,14 +137,9 @@ end;
 
 procedure TProductManagementForm.ApplyUpdateButtonClick(Sender: TObject);
 begin
-if StockDataAccess.UpdateStockItem(
-     BarcodeEdit2.Text,
-     DescriptionEdit2.Text,
-     DepartmentComboBox2.Text,
-     SupplierComboBox2.Text,
-     StrToFloat(CostSpinEdit2.Text),
-     StrToInt(QuantitySpinEdit2.Text)
-   ) then
+  if StockDataAccess.UpdateStockItem(BarcodeEdit2.Text, DescriptionEdit2.Text,
+    DepartmentComboBox2.Text, SupplierComboBox2.Text,
+    StrToFloat(CostSpinEdit2.Text), StrToInt(QuantitySpinEdit2.Text)) then
   begin
     ShowMessage('Updated successfully');
     ClearFields;
@@ -247,8 +250,8 @@ end;
 
 procedure TProductManagementForm.CancelUpdateClick(Sender: TObject);
 begin
-ClearFields;
-ProductManagementPageControl.ActivePage := BrowseProductsTabSheet;
+  ClearFields;
+  ProductManagementPageControl.ActivePage := BrowseProductsTabSheet;
 end;
 
 procedure TProductManagementForm.ClearFields;
@@ -341,7 +344,7 @@ end;
 procedure TProductManagementForm.UpdateProductTabSheetShow(Sender: TObject);
 begin
   ClearFields;
-  UpdatePanel.Enabled := False;
+  UpdatePanel.Enabled := false;
 end;
 
 procedure TProductManagementForm.UpdateSupplierCombo;
