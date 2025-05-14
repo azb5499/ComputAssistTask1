@@ -17,9 +17,14 @@ type
     MarkupGrid: TDBGrid;
     MarkupDataSource: TDataSource;
     RefreshButton: TButton;
+    MarkupControlsPanel: TPanel;
+    Button1: TButton;
+    UpdateAllMarkup: TButton;
+    UpdateSingleMarkup: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure RefreshButtonClick(Sender: TObject);
+    procedure UpdateSingleMarkupClick(Sender: TObject);
   private
     procedure PopulateDBGrid;
     procedure AutoSizeGridColumns(Grid: TDBGrid; SampleSize: Integer = 100);
@@ -57,6 +62,65 @@ end;
 procedure TUpdateMarkupForm.RefreshButtonClick(Sender: TObject);
 begin
   PopulateDBGrid;
+end;
+
+procedure TUpdateMarkupForm.UpdateSingleMarkupClick(Sender: TObject);
+var
+  Barcode, MarkupStr: string;
+  dMarkup: Double;
+  details: TArray<string>;
+  dlgRes: Integer;
+  DataAccess: TStockDataAccess;
+begin
+  try
+    if not InputQuery('Update Markup', 'Enter the product barcode:', Barcode) then
+      Exit;
+
+    DataAccess := TStockDataAccess.Create;
+    try
+      details := DataAccess.FindProductByBarcode(Barcode);
+      if Length(details) = 0 then
+      begin
+        ShowMessageFmt('No product found with barcode "%s".', [Barcode]);
+        Exit;
+      end;
+
+      if not InputQuery('Update Markup', 'Enter new markup (e.g. 0.5 for 50%):', MarkupStr) then
+        Exit;
+      try
+        dMarkup := StrToFloat(MarkupStr);
+      except
+        on E: EConvertError do
+        begin
+          ShowMessage('Invalid markup value. Please enter a number like 0.5 for 50%.');
+          Exit;
+        end;
+      end;
+
+
+      dlgRes := MessageDlg(
+        Format('Apply a %.0f%% markup to barcode %s?', [dMarkup * 100, Barcode]),
+        mtConfirmation,
+        [mbYes, mbNo],
+        0
+      );
+      if dlgRes <> mrYes then
+        Exit;
+
+      if DataAccess.UpdateProductMarkup(Barcode, dMarkup) then
+        ShowMessage('Markup updated successfully.')
+      else
+        ShowMessage('Update failed: no rows affected.');
+
+    finally
+      DataAccess.Free;
+      PopulateDBGrid;
+    end;
+
+  except
+    on E: Exception do
+      ShowMessageFmt('An error occurred (%s): %s', [E.ClassName, E.Message]);
+  end;
 end;
 
 procedure TUpdateMarkupForm.AutoSizeGridColumns(Grid: TDBGrid; SampleSize: Integer);

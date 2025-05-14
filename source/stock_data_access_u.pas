@@ -33,6 +33,8 @@ type
   sDepartmentName, sSupplierName: string;
   dCostPrice: Double;
   iQuantity: Integer): Boolean;
+  function UpdateProductMarkup(const ABarcode: string;
+  const dNewMarkup: Double): Boolean;
   end;
 
 var
@@ -365,6 +367,59 @@ begin
     qry.Free;
   end;
 end;
+
+
+
+function TStockDataAccess.UpdateProductMarkup(const ABarcode: string;
+  const dNewMarkup: Double): Boolean;
+var
+  qry: TFDQuery;
+  oldCost, newRetail: Double;
+begin
+  qry := TFDQuery.Create(nil);
+  try
+    qry.Connection := StockManagerDataModule.StockManagerFDConnection;
+    if not qry.Connection.InTransaction then
+      qry.Connection.StartTransaction;
+
+    // 1) Fetch current cost
+    qry.SQL.Text :=
+      'SELECT CostPrice FROM StockItem WHERE Barcode = :BC';
+    qry.ParamByName('BC').AsString := ABarcode;
+    qry.Open;
+    if qry.Eof then
+    begin
+      Result := False;
+      Exit;
+    end;
+    oldCost := qry.FieldByName('CostPrice').AsFloat;
+    qry.Close;
+
+    // 2) Calculate new retail
+    newRetail := RoundTo(oldCost * (1 + dNewMarkup), -2);
+
+    // 3) Update markup and retail
+    qry.SQL.Text :=
+      'UPDATE StockItem ' +
+      'SET MarkupPercent = :Mark, RetailPrice = :Retail ' +
+      'WHERE Barcode = :BC';
+    qry.ParamByName('Mark').AsFloat   := dNewMarkup;
+    qry.ParamByName('Retail').AsFloat := newRetail;
+    qry.ParamByName('BC').AsString    := ABarcode;
+
+    qry.ExecSQL;
+    // <-- ExecSQL is a procedure; now check RowsAffected:
+    Result := qry.RowsAffected > 0;
+    if Result then
+      qry.Connection.Commit
+    else
+      qry.Connection.Rollback;
+  finally
+    qry.Free;
+  end;
+end;
+
+
 
 function TStockDataAccess.UpdateStockItem(
   const sBarcode, sDescription,

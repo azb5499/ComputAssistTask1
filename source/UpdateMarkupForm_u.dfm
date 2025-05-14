@@ -45,18 +45,50 @@ object UpdateMarkupForm: TUpdateMarkupForm
       TitleFont.Name = 'Segoe UI'
       TitleFont.Style = []
     end
-    object RefreshButton: TButton
-      Left = 272
-      Top = 289
-      Width = 113
-      Height = 80
-      Caption = 'Refresh data'
+    object MarkupControlsPanel: TPanel
+      Left = 208
+      Top = 182
+      Width = 233
+      Height = 227
       TabOrder = 2
+      object UpdateAllMarkup: TButton
+        Left = 48
+        Top = 32
+        Width = 145
+        Height = 57
+        Caption = 'Update all markups'
+        TabOrder = 0
+      end
+      object UpdateSingleMarkup: TButton
+        Left = 48
+        Top = 120
+        Width = 145
+        Height = 57
+        Caption = 'Update single Markup'
+        TabOrder = 1
+        OnClick = UpdateSingleMarkupClick
+      end
+    end
+    object RefreshButton: TButton
+      Left = 466
+      Top = 182
+      Width = 145
+      Height = 123
+      Caption = 'Refresh data'
+      TabOrder = 3
       OnClick = RefreshButtonClick
     end
   end
+  object Button1: TButton
+    Left = 480
+    Top = 392
+    Width = 1
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 1
+  end
   object MarkupDataSource: TDataSource
-    Left = 304
-    Top = 224
+    Left = 504
+    Top = 312
   end
 end
