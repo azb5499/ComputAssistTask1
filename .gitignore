@@ -35,6 +35,7 @@
 # Resource binary files (auto-generated)
 *.res
 *.dres
+*.fdb
 
 # ========================================
 # IDE-Specific & User Files (ignore)
