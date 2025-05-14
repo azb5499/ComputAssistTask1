@@ -35,6 +35,7 @@ type
     function UpdateProductMarkup(const ABarcode: string;
       const dNewMarkup: double): Boolean;
       function UpdateAllMarkups(const dNewMarkup: Double): Boolean;
+      function GetTotalStockValue: Double;
   end;
 
 var
@@ -517,6 +518,23 @@ begin
     qry.ExecSQL;
     qry.Connection.Commit;
     Result := True;
+  finally
+    qry.Free;
+  end;
+end;
+
+function TStockDataAccess.GetTotalStockValue: Double;
+var
+  qry: TFDQuery;
+begin
+  Result := 0.0;
+  qry := TFDQuery.Create(nil);
+  try
+    qry.Connection := StockManagerDataModule.StockManagerFDConnection;
+    qry.SQL.Text := 'SELECT SUM(RetailPrice * Quantity) AS TotalStockValue FROM StockItem';
+    qry.Open;
+    if not qry.Fields[0].IsNull then
+      Result := qry.Fields[0].AsFloat;
   finally
     qry.Free;
   end;

@@ -138,18 +138,18 @@ object ProductManagementForm: TProductManagementForm
           TabOrder = 1
           object AddModeButton: TButton
             Left = 40
-            Top = 122
+            Top = 90
             Width = 129
-            Height = 64
+            Height = 55
             Caption = 'Add Product'
             TabOrder = 0
             OnClick = AddModeButtonClick
           end
           object UpdateModeButton: TButton
             Left = 40
-            Top = 33
+            Top = 17
             Width = 129
-            Height = 65
+            Height = 56
             Caption = 'Update product'
             TabOrder = 1
             OnClick = UpdateModeButtonClick

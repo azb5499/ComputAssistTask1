@@ -14,7 +14,8 @@ uses
   UserDashboardForm_u in 'source\UserDashboardForm_u.pas' {UserDashboardForm},
   AdminDashboardForm_u in 'source\AdminDashboardForm_u.pas' {AdminDashboardForm},
   AddUserForm_u in 'source\AddUserForm_u.pas' {AddUserForm},
-  UpdateMarkupForm_u in 'source\UpdateMarkupForm_u.pas' {UpdateMarkupForm};
+  UpdateMarkupForm_u in 'source\UpdateMarkupForm_u.pas' {UpdateMarkupForm},
+  ReportDataModule_u in 'source\ReportDataModule_u.pas' {ReportDataModule: TDataModule};
 
 {$R *.res}
 
@@ -28,5 +29,6 @@ Application.CreateForm(TStockManagerDataModule, StockManagerDataModule);
   Application.CreateForm(TAdminDashboardForm, AdminDashboardForm);
   Application.CreateForm(TAddUserForm, AddUserForm);
   Application.CreateForm(TUpdateMarkupForm, UpdateMarkupForm);
+  Application.CreateForm(TReportDataModule, ReportDataModule);
   Application.Run;
 end.

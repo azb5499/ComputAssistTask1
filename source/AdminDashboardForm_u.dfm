@@ -22,18 +22,18 @@ object AdminDashboardForm: TAdminDashboardForm
     ExplicitWidth = 622
     ExplicitHeight = 433
     object AddUserButton: TButton
-      Left = 224
-      Top = 256
-      Width = 169
+      Left = 168
+      Top = 248
+      Width = 305
       Height = 81
       Caption = 'Add user'
       TabOrder = 0
       OnClick = AddUserButtonClick
     end
     object UpdateMarkupButton: TButton
-      Left = 224
-      Top = 144
-      Width = 169
+      Left = 168
+      Top = 152
+      Width = 305
       Height = 81
       Caption = 'Update Markups'
       TabOrder = 1
@@ -47,6 +47,15 @@ object AdminDashboardForm: TAdminDashboardForm
       Kind = bkClose
       NumGlyphs = 2
       TabOrder = 2
+    end
+    object TotalStockValueReport: TButton
+      Left = 168
+      Top = 48
+      Width = 305
+      Height = 90
+      Caption = 'View Total Stock Value Report'
+      TabOrder = 3
+      OnClick = TotalStockValueReportClick
     end
   end
 end
