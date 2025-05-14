@@ -14,7 +14,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+Application.CreateForm(TStockManagerDataModule, StockManagerDataModule);
   Application.CreateForm(TLoginForm, LoginForm);
-  Application.CreateForm(TStockManagerDataModule, StockManagerDataModule);
   Application.Run;
 end.

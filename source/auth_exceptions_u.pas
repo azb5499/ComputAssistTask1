@@ -8,6 +8,8 @@ uses
 type
   EUserNotFound = class(Exception);
   EPasswordMismatch = class(Exception);
+  EUserExists     = class(Exception);
+  ERoleNotFound   = class(Exception);
 
 implementation
 

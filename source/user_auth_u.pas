@@ -9,24 +9,24 @@ uses
 type
   TUserAuth = class
   public
-    function AuthenticateUser(const AUsername, APassword: string): TUser;
+    function AuthenticateUser(const sUsername, sPassword: string): TUser;
   end;
 
 implementation
 
-function TUserAuth.AuthenticateUser(const AUsername, APassword: string): TUser;
+function TUserAuth.AuthenticateUser(const sUsername, sPassword: string): TUser;
 var
   RetrievedUser: TUser;
   HashedInputPassword: string;
 begin
   // Assume input is validated elsewhere
 
-  RetrievedUser := DataAccess.GetUserByUsername(AUsername);
+  RetrievedUser := DataAccess.GetUserByUsername(sUsername);
   if not Assigned(RetrievedUser) then
-    raise EUserNotFound.CreateFmt('User "%s" not found.', [AUsername]);
+    raise EUserNotFound.CreateFmt('User "%s" not found.', [sUsername]);
 
   try
-    HashedInputPassword := THashSHA2.GetHashString(APassword);
+    HashedInputPassword := THashSHA2.GetHashString(sPassword);
 
     if RetrievedUser.Password <> HashedInputPassword then
       raise EPasswordMismatch.Create('Password is incorrect.');

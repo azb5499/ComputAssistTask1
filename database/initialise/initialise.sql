@@ -13,4 +13,3 @@ CREATE TABLE Users (
 INSERT INTO Role (UserRoleName) VALUES ('admin');
 INSERT INTO Role (UserRoleName) VALUES ('user');
 
-COMMIT;

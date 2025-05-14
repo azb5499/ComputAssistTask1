@@ -62,8 +62,15 @@ begin
 
     if objUser.UserRole = 'admin' then
       // …show admin UI…
+      begin
+         ShowMessage('welcome admin');
+      end
     else if objUser.UserRole = 'user' then
       // …show user UI…
+      begin
+         ShowMessage('welcome user');
+      end;
+
 
   finally
     objUserAuth.Free;

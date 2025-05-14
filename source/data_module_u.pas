@@ -31,6 +31,7 @@ var
 
 implementation
 
+uses user_data_access_u;
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 {$R *.dfm}
 
@@ -81,7 +82,9 @@ begin
     StockManagerScript.SQLScripts[0].SQL.LoadFromFile(ScriptPath);
     StockManagerScript.ExecuteAll;
 
+    DataAccess.AddAdmin('admin','admin');
     ShowMessage('Database created and initialized.');
+    ShowMessage('Your default Admin credentials are: Username > admin / Password > admin ')
   end
   else
   begin
@@ -90,12 +93,6 @@ begin
     ShowMessage('Database exists. Connected.');
   end;
 end;
-
-initialization
-  StockManagerDataModule := TStockManagerDataModule.Create(nil);
-
-finalization
-  FreeAndNil(StockManagerDataModule);
 
 end.
 

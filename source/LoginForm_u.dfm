@@ -2,8 +2,8 @@ object LoginForm: TLoginForm
   Left = 0
   Top = 0
   Caption = 'Login'
-  ClientHeight = 441
-  ClientWidth = 624
+  ClientHeight = 474
+  ClientWidth = 643
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,8 +14,8 @@ object LoginForm: TLoginForm
   object LoginLayoutGridPanel: TGridPanel
     Left = 0
     Top = 0
-    Width = 624
-    Height = 441
+    Width = 643
+    Height = 474
     Align = alClient
     ColumnCollection = <
       item
@@ -51,13 +51,13 @@ object LoginForm: TLoginForm
         SizeStyle = ssAuto
       end>
     TabOrder = 0
-    ExplicitWidth = 622
-    ExplicitHeight = 433
+    ExplicitWidth = 641
+    ExplicitHeight = 466
     object Image1: TImage
       Left = 1
       Top = 1
-      Width = 622
-      Height = 107
+      Width = 641
+      Height = 115
       Align = alClient
       Stretch = True
       ExplicitLeft = 264
@@ -67,9 +67,9 @@ object LoginForm: TLoginForm
     end
     object CentralLoginGridPanel: TGridPanel
       Left = 1
-      Top = 108
-      Width = 622
-      Height = 261
+      Top = 116
+      Width = 641
+      Height = 281
       Align = alClient
       ColumnCollection = <
         item
@@ -102,31 +102,24 @@ object LoginForm: TLoginForm
           Value = 100.000000000000000000
         end>
       TabOrder = 0
-      ExplicitTop = 106
-      ExplicitWidth = 620
-      ExplicitHeight = 257
       object LeftPanel: TPanel
         Left = 1
         Top = 1
-        Width = 196
-        Height = 259
+        Width = 202
+        Height = 279
         Align = alClient
         Color = clLightsteelblue
         ParentBackground = False
         TabOrder = 0
-        ExplicitWidth = 195
-        ExplicitHeight = 255
       end
       object CentrePanel: TPanel
-        Left = 197
+        Left = 203
         Top = 1
-        Width = 229
-        Height = 259
+        Width = 236
+        Height = 279
         Align = alClient
         BorderWidth = 100
         TabOrder = 1
-        ExplicitLeft = 196
-        ExplicitHeight = 255
         object LoginButton: TButton
           AlignWithMargins = True
           Left = 50
@@ -177,32 +170,26 @@ object LoginForm: TLoginForm
         end
       end
       object RightPanel: TPanel
-        Left = 426
+        Left = 439
         Top = 1
-        Width = 195
-        Height = 259
+        Width = 201
+        Height = 279
         Align = alClient
         Color = clLightsteelblue
         ParentBackground = False
         TabOrder = 2
-        ExplicitLeft = 425
-        ExplicitWidth = 194
-        ExplicitHeight = 255
       end
     end
     object FooterPanel: TPanel
       AlignWithMargins = True
       Left = 4
-      Top = 372
-      Width = 616
-      Height = 65
+      Top = 400
+      Width = 635
+      Height = 70
       Align = alClient
       Color = clSkyBlue
       ParentBackground = False
       TabOrder = 1
-      ExplicitTop = 366
-      ExplicitWidth = 614
-      ExplicitHeight = 63
     end
   end
 end
