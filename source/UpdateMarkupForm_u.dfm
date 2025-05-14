@@ -58,6 +58,7 @@ object UpdateMarkupForm: TUpdateMarkupForm
         Height = 57
         Caption = 'Update all markups'
         TabOrder = 0
+        OnClick = UpdateAllMarkupClick
       end
       object UpdateSingleMarkup: TButton
         Left = 48

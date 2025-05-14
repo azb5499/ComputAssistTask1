@@ -5,9 +5,11 @@ interface
 uses
   System.SysUtils, System.Classes,
   FireDAC.Comp.Client, Data.DB,
-  data_module_u, stock_exceptions_u, Math,System.Generics.Collections;
+  data_module_u, stock_exceptions_u, Math, System.Generics.Collections;
 
-  const MarkupFraction = 0.5;
+const
+  MarkupFraction = 0.5;
+
 type
   TStockDataAccess = class
   public
@@ -25,16 +27,14 @@ type
     function SearchByDepartment(const sDept: string): TFDQuery;
     function SearchBySupplier(const sSupp: string): TFDQuery;
     function SearchItems(const sField, sValue: string): TFDQuery;
-    function FetchAllSuppliers() : TArray<string>;
-    function FetchAllDepartments() : TArray<string>;
+    function FetchAllSuppliers(): TArray<string>;
+    function FetchAllDepartments(): TArray<string>;
     function FindProductByBarcode(const ABarcode: string): TArray<string>;
-    function UpdateStockItem(
-  const sBarcode, sDescription,
-  sDepartmentName, sSupplierName: string;
-  dCostPrice: Double;
-  iQuantity: Integer): Boolean;
-  function UpdateProductMarkup(const ABarcode: string;
-  const dNewMarkup: Double): Boolean;
+    function UpdateStockItem(const sBarcode, sDescription, sDepartmentName,
+      sSupplierName: string; dCostPrice: double; iQuantity: Integer): Boolean;
+    function UpdateProductMarkup(const ABarcode: string;
+      const dNewMarkup: double): Boolean;
+      function UpdateAllMarkups(const dNewMarkup: Double): Boolean;
   end;
 
 var
@@ -123,7 +123,6 @@ begin
     if not qry.Connection.InTransaction then
       qry.Connection.StartTransaction;
 
-
     qry.SQL.Text :=
       'SELECT DepartmentID FROM Department WHERE DepartmentName = :Name';
     qry.ParamByName('Name').AsString := sDepartmentName;
@@ -134,7 +133,6 @@ begin
     iDeptID := qry.FieldByName('DepartmentID').AsInteger;
     qry.Close;
 
-
     qry.SQL.Text :=
       'SELECT SupplierID FROM Supplier WHERE SupplierName = :Name';
     qry.ParamByName('Name').AsString := sSupplierName;
@@ -144,7 +142,6 @@ begin
         [sSupplierName]);
     iSuppID := qry.FieldByName('SupplierID').AsInteger;
     qry.Close;
-
 
     qry.SQL.Text := 'SELECT 1 FROM StockItem WHERE Barcode = :BC';
     qry.ParamByName('BC').AsString := sBarcode;
@@ -297,8 +294,7 @@ begin
   qry := TFDQuery.Create(nil);
   try
     qry.Connection := StockManagerDataModule.StockManagerFDConnection;
-    qry.SQL.Text :=
-      'SELECT SupplierName FROM Supplier ORDER BY SupplierName';
+    qry.SQL.Text := 'SELECT SupplierName FROM Supplier ORDER BY SupplierName';
     qry.Open;
     while not qry.Eof do
     begin
@@ -336,15 +332,15 @@ begin
   end;
 end;
 
-function TStockDataAccess.FindProductByBarcode(const ABarcode: string): TArray<string>;
+function TStockDataAccess.FindProductByBarcode(const ABarcode: string)
+  : TArray<string>;
 var
   qry: TFDQuery;
 begin
   qry := TFDQuery.Create(nil);
   try
     qry.Connection := StockManagerDataModule.StockManagerFDConnection;
-    qry.SQL.Text :=
-      'SELECT si.Barcode, d.DepartmentName, s.SupplierName, ' +
+    qry.SQL.Text := 'SELECT si.Barcode, d.DepartmentName, s.SupplierName, ' +
       '       si.Description, si.CostPrice, si.QuantityOnHand ' +
       'FROM StockItem si ' +
       'JOIN Department d ON si.DepartmentID = d.DepartmentID ' +
@@ -361,20 +357,19 @@ begin
     Result[1] := qry.FieldByName('DepartmentName').AsString;
     Result[2] := qry.FieldByName('SupplierName').AsString;
     Result[3] := qry.FieldByName('Description').AsString;
-    Result[4] := FloatToStrF(qry.FieldByName('CostPrice').AsFloat, ffFixed, 15, 2);
+    Result[4] := FloatToStrF(qry.FieldByName('CostPrice').AsFloat,
+      ffFixed, 15, 2);
     Result[5] := IntToStr(qry.FieldByName('QuantityOnHand').AsInteger);
   finally
     qry.Free;
   end;
 end;
 
-
-
 function TStockDataAccess.UpdateProductMarkup(const ABarcode: string;
-  const dNewMarkup: Double): Boolean;
+  const dNewMarkup: double): Boolean;
 var
   qry: TFDQuery;
-  oldCost, newRetail: Double;
+  oldCost, newRetail: double;
 begin
   qry := TFDQuery.Create(nil);
   try
@@ -383,8 +378,7 @@ begin
       qry.Connection.StartTransaction;
 
     // 1) Fetch current cost
-    qry.SQL.Text :=
-      'SELECT CostPrice FROM StockItem WHERE Barcode = :BC';
+    qry.SQL.Text := 'SELECT CostPrice FROM StockItem WHERE Barcode = :BC';
     qry.ParamByName('BC').AsString := ABarcode;
     qry.Open;
     if qry.Eof then
@@ -399,13 +393,12 @@ begin
     newRetail := RoundTo(oldCost * (1 + dNewMarkup), -2);
 
     // 3) Update markup and retail
-    qry.SQL.Text :=
-      'UPDATE StockItem ' +
+    qry.SQL.Text := 'UPDATE StockItem ' +
       'SET MarkupPercent = :Mark, RetailPrice = :Retail ' +
       'WHERE Barcode = :BC';
-    qry.ParamByName('Mark').AsFloat   := dNewMarkup;
+    qry.ParamByName('Mark').AsFloat := dNewMarkup;
     qry.ParamByName('Retail').AsFloat := newRetail;
-    qry.ParamByName('BC').AsString    := ABarcode;
+    qry.ParamByName('BC').AsString := ABarcode;
 
     qry.ExecSQL;
     // <-- ExecSQL is a procedure; now check RowsAffected:
@@ -419,12 +412,58 @@ begin
   end;
 end;
 
+function TStockDataAccess.UpdateAllMarkups(const dNewMarkup: double): Boolean;
+var
+  qrySelect, qryUpdate: TFDQuery;
+  newRetail: double;
+  updatedCount: Integer;
+begin
+  updatedCount := 0;
+  qrySelect := TFDQuery.Create(nil);
+  qryUpdate := TFDQuery.Create(nil);
+  try
+    qrySelect.Connection := StockManagerDataModule.StockManagerFDConnection;
+    qryUpdate.Connection := StockManagerDataModule.StockManagerFDConnection;
 
+    if not qrySelect.Connection.InTransaction then
+      qrySelect.Connection.StartTransaction;
 
-function TStockDataAccess.UpdateStockItem(
-  const sBarcode, sDescription,
-  sDepartmentName, sSupplierName: string;
-  dCostPrice: Double;
+    qrySelect.SQL.Text := 'SELECT Barcode, CostPrice FROM StockItem';
+    qrySelect.Open;
+
+    qryUpdate.SQL.Text := 'UPDATE StockItem ' +
+      'SET MarkupPercent = :Mark, RetailPrice = :Retail ' +
+      'WHERE Barcode = :BC';
+
+    while not qrySelect.Eof do
+    begin
+      newRetail := RoundTo(qrySelect.FieldByName('CostPrice').AsFloat *
+        (1 + dNewMarkup), -2);
+
+      qryUpdate.ParamByName('Mark').AsFloat := dNewMarkup;
+      qryUpdate.ParamByName('Retail').AsFloat := newRetail;
+      qryUpdate.ParamByName('BC').AsString :=
+        qrySelect.FieldByName('Barcode').AsString;
+      qryUpdate.ExecSQL;
+
+      Inc(updatedCount, qryUpdate.RowsAffected);
+      qrySelect.Next;
+    end;
+
+    if updatedCount > 0 then
+      qrySelect.Connection.Commit
+    else
+      qrySelect.Connection.Rollback;
+
+    Result := updatedCount > 0;
+  finally
+    qrySelect.Free;
+    qryUpdate.Free;
+  end;
+end;
+
+function TStockDataAccess.UpdateStockItem(const sBarcode, sDescription,
+  sDepartmentName, sSupplierName: string; dCostPrice: double;
   iQuantity: Integer): Boolean;
 var
   qry: TFDQuery;
@@ -442,8 +481,8 @@ begin
     qry.ParamByName('Name').AsString := sDepartmentName;
     qry.Open;
     if qry.Eof then
-      raise EDepartmentNotFound.CreateFmt(
-        'Department "%s" does not exist.', [sDepartmentName]);
+      raise EDepartmentNotFound.CreateFmt('Department "%s" does not exist.',
+        [sDepartmentName]);
     iDeptID := qry.FieldByName('DepartmentID').AsInteger;
     qry.Close;
 
@@ -453,21 +492,16 @@ begin
     qry.ParamByName('Name').AsString := sSupplierName;
     qry.Open;
     if qry.Eof then
-      raise ESupplierNotFound.CreateFmt(
-        'Supplier "%s" does not exist.', [sSupplierName]);
+      raise ESupplierNotFound.CreateFmt('Supplier "%s" does not exist.',
+        [sSupplierName]);
     iSuppID := qry.FieldByName('SupplierID').AsInteger;
     qry.Close;
 
     // Update StockItem record
-    qry.SQL.Text :=
-      'UPDATE StockItem SET ' +
-      '  Description     = :Desc, ' +
-      '  DepartmentID    = :DeptID, ' +
-      '  SupplierID      = :SuppID, ' +
-      '  CostPrice       = :Cost, ' +
-      '  MarkupPercent   = :Mark, ' +
-      '  RetailPrice     = :Retail, ' +
-      '  QuantityOnHand  = :Qty ' +
+    qry.SQL.Text := 'UPDATE StockItem SET ' + '  Description     = :Desc, ' +
+      '  DepartmentID    = :DeptID, ' + '  SupplierID      = :SuppID, ' +
+      '  CostPrice       = :Cost, ' + '  MarkupPercent   = :Mark, ' +
+      '  RetailPrice     = :Retail, ' + '  QuantityOnHand  = :Qty ' +
       'WHERE Barcode = :BC';
 
     qry.ParamByName('BC').AsString := sBarcode;
@@ -476,7 +510,8 @@ begin
     qry.ParamByName('SuppID').AsInteger := iSuppID;
     qry.ParamByName('Cost').AsFloat := RoundTo(dCostPrice, -2);
     qry.ParamByName('Mark').AsFloat := MarkupFraction;
-    qry.ParamByName('Retail').AsFloat := RoundTo(dCostPrice * (1 + MarkupFraction), -2);
+    qry.ParamByName('Retail').AsFloat :=
+      RoundTo(dCostPrice * (1 + MarkupFraction), -2);
     qry.ParamByName('Qty').AsInteger := iQuantity;
 
     qry.ExecSQL;
@@ -486,6 +521,7 @@ begin
     qry.Free;
   end;
 end;
+
 initialization
 
 StockDataAccess := TStockDataAccess.Create;
