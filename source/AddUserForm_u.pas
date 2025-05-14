@@ -34,27 +34,53 @@ implementation
 uses AdminDashboardForm_u;
 
 procedure TAddUserForm.AddUserButtonClick(Sender: TObject);
+const
+  MIN_LEN = 4;
+var
+  sUser, sPass: string;
 begin
-if UsernameLabelEdit.Text = '' then
-begin
-  ShowMessage('Enter Username');
-  exit;
+  sUser := Trim(UsernameLabelEdit.Text);
+  sPass := Trim(PasswordLabelEdit.Text);
+
+
+  if sUser = '' then
+  begin
+    ShowMessage('Please enter a username.');
+    UsernameLabelEdit.SetFocus;
+    Exit;
+  end;
+
+  if sPass = '' then
+  begin
+    ShowMessage('Please enter a password.');
+    PasswordLabelEdit.SetFocus;
+    Exit;
+  end;
+
+  if Length(sUser) < MIN_LEN then
+  begin
+    ShowMessage(Format('Username must be at least %d characters long.', [MIN_LEN]));
+    UsernameLabelEdit.SetFocus;
+    Exit;
+  end;
+
+  if Length(sPass) < MIN_LEN then
+  begin
+    ShowMessage(Format('Password must be at least %d characters long.', [MIN_LEN]));
+    PasswordLabelEdit.SetFocus;
+    Exit;
+  end;
+
+
+  DataAccess.AddUser(sUser, sPass);
+
+  ShowMessage('New user registered:'#13 +
+              '  Username: ' + sUser + #13 +
+              '  Password: ' + sPass);
+
+  ClearFields;
 end;
 
-if PasswordLabelEdit.Text = '' then
-begin
-  ShowMessage('Enter Password');
-  Exit;
-end;
-
-
-DataAccess.AddUser(UsernameLabelEdit.Text,PasswordLabelEdit.Text);
-
-ShowMessage('New user registered.');
-ShowMessage('Username: '+UsernameLabelEdit.Text+'. Password: '+PasswordLabelEdit.Text+'.');
-
-ClearFields;
-end;
 
 procedure TAddUserForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin

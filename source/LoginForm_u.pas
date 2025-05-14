@@ -52,6 +52,18 @@ begin
   sUserName := UsernameLabelEdit.Text;
   sPassword := PasswordLabelEdit.Text;
 
+  if sUserName = '' then
+  begin
+    ShowMessage('Please enter a username!');
+    exit;
+  end;
+
+  if sPassword = '' then
+  begin
+    ShowMessage('Please enter a password!');
+    exit;
+  end;
+
   objUserAuth := TUserAuth.Create;
   objUser := nil;
 

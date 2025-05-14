@@ -28,7 +28,7 @@ object ProductManagementForm: TProductManagementForm
       Top = 1
       Width = 697
       Height = 459
-      ActivePage = BrowseProductsTabSheet
+      ActivePage = AddProductTabsheet
       Align = alClient
       TabOrder = 1
       ExplicitWidth = 695
