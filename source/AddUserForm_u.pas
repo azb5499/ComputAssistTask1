@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Buttons,
-  Vcl.Mask,user_data_access_u;
+  Vcl.Mask,user_data_access_u, Vcl.Imaging.jpeg;
 
 type
   TAddUserForm = class(TForm)
@@ -15,6 +15,7 @@ type
     AddUserButton: TButton;
     UsernameLabelEdit: TLabeledEdit;
     PasswordLabelEdit: TLabeledEdit;
+    AddUserBackgroundImage: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure AddUserButtonClick(Sender: TObject);
   private

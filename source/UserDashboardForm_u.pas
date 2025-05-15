@@ -5,13 +5,15 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,ProductManagement_u,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Vcl.Imaging.jpeg;
 
 type
   TUserDashboardForm = class(TForm)
     BackButton: TButton;
     ProductManagementButton: TButton;
     UserDashboardPanel: TPanel;
+    UserDashboardBackgroundImage: TImage;
+    UserDashboardControlPanel: TPanel;
     procedure BackButtonClick(Sender: TObject);
     procedure ProductManagementButtonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

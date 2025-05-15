@@ -6,12 +6,12 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask,
-  user_auth_u, user_u, System.Hash,AdminDashboardForm_u;
+  user_auth_u, user_u, System.Hash,AdminDashboardForm_u, Vcl.Imaging.jpeg;
 
 type
   TLoginForm = class(TForm)
     LoginLayoutGridPanel: TGridPanel;
-    Image1: TImage;
+    BannerImage: TImage;
     CentralLoginGridPanel: TGridPanel;
     LeftPanel: TPanel;
     CentrePanel: TPanel;

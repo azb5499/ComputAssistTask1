@@ -8,7 +8,7 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,
   Data.DB, Vcl.Grids, Vcl.DBGrids,
-  stock_data_access_u;
+  stock_data_access_u, Vcl.Imaging.jpeg;
 
 type
   TUpdateMarkupForm = class(TForm)
@@ -21,6 +21,7 @@ type
     Button1: TButton;
     UpdateAllMarkup: TButton;
     UpdateSingleMarkup: TButton;
+    UpdateMarkupBackgroundImage: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure RefreshButtonClick(Sender: TObject);

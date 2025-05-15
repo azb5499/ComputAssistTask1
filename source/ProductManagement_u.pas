@@ -7,7 +7,7 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   stock_data_access_u,
-  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Samples.Spin, Vcl.ComCtrls;
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Samples.Spin, Vcl.ComCtrls, Vcl.Imaging.jpeg;
 
 type
   TProductManagementForm = class(TForm)
@@ -48,6 +48,23 @@ type
     BarcodeSearch: TEdit;
     SearchUpdateButton: TButton;
     UpdatePanel: TPanel;
+    AddProductBackgroundImage: TImage;
+    Image1: TImage;
+    BrowseProductImage: TImage;
+    UpdateProductBackgroundImage: TImage;
+    SearchLabel: TLabel;
+    UpdateBarcodeLabel: TLabel;
+    UpdateDescriptionLabel: TLabel;
+    UpdateDepartmentLabel: TLabel;
+    UpdateSupplierLabel: TLabel;
+    UpdateCostLabel: TLabel;
+    UpdateQuantityLabel: TLabel;
+    AddBarcodeLabel: TLabel;
+    AddDescriptionLabel: TLabel;
+    AddDepartmentLabel: TLabel;
+    AddSupplierLabel: TLabel;
+    AddCostLabel: TLabel;
+    AddQuantityLabel: TLabel;
     procedure BackButtonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);

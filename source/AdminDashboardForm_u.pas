@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons,
-  ppComm, ppRelatv, ppProd, ppClass, ppReport,ReportDataModule_u;
+  ppComm, ppRelatv, ppProd, ppClass, ppReport,ReportDataModule_u,
+  Vcl.Imaging.jpeg;
 
 type
   TAdminDashboardForm = class(TForm)
@@ -14,6 +15,8 @@ type
     UpdateMarkupButton: TButton;
     CloseBitButton: TBitBtn;
     TotalStockValueReport: TButton;
+    AdminDahsboardBackgroundImage: TImage;
+    AdminDashboardControls: TPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure AddUserButtonClick(Sender: TObject);
     procedure UpdateMarkupButtonClick(Sender: TObject);
