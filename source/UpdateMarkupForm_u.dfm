@@ -1,6 +1,7 @@
 object UpdateMarkupForm: TUpdateMarkupForm
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'Markup Form'
   ClientHeight = 441
   ClientWidth = 624

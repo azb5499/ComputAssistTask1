@@ -1,6 +1,7 @@
 object AdminDashboardForm: TAdminDashboardForm
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'Admin Dashboard'
   ClientHeight = 441
   ClientWidth = 624

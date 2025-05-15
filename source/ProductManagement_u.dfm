@@ -1,6 +1,7 @@
 object ProductManagementForm: TProductManagementForm
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'Product Management'
   ClientHeight = 461
   ClientWidth = 699

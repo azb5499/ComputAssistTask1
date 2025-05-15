@@ -1,6 +1,7 @@
 object AddUserForm: TAddUserForm
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'User Addition Form'
   ClientHeight = 441
   ClientWidth = 624

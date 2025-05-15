@@ -1,6 +1,7 @@
 object UserDashboardForm: TUserDashboardForm
   Left = 0
   Top = 0
+  BorderStyle = bsSingle
   Caption = 'User Dashboard'
   ClientHeight = 441
   ClientWidth = 624
