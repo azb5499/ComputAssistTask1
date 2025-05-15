@@ -7,12 +7,23 @@ The system is built for a small wholesale business to manage inventory, record s
 
 ## ✅ Features
 
-- Track stock from arrival to sale.
+- Track stock.
 - Add, update, and manage product information.
-- Record customer sales and generate a basic receipt.
 - View real-time stock levels and total stock value.
 - Generate printable reports using ReportBuilder.
 - Admin and Staff roles with appropriate access permissions.
+
+---
+
+## 😥 Notable experience differences
+
+- Windows resizing has been disabled since forms are not yet responsive.
+- Validation works but can be improved into a utilities class.
+- Fonts are not consistent throughout the entire application. `Sans serif collection` was supposed to be the default of choice.
+- Some text positioning seems is not centered and aligned.
+- Some internal code structures can be refactored to align with SOLID,KISS and DRY principles. Will be a future refactor.
+- There are noticeable lack of features in terms of deleting records. The feature is simple to implement but this was mainly to align with requirements. Possible future inclusion.
+
 
 ---
 
